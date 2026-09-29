@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#0e3424" />
+      <stop offset="60%" stop-color="#082217" />
+      <stop offset="100%" stop-color="#04140e" />
+    </radialGradient>
+
+    <!-- Gold Gradients -->
+    <linearGradient id="goldRoof" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fae8a4" />
+      <stop offset="35%" stop-color="#d4af37" />
+      <stop offset="70%" stop-color="#fff1b8" />
+      <stop offset="100%" stop-color="#aa8017" />
+    </linearGradient>
+
+    <linearGradient id="goldStem" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#b8860b" />
+      <stop offset="50%" stop-color="#eedc82" />
+      <stop offset="100%" stop-color="#d4af37" />
+    </linearGradient>
+
+    <!-- Red Leaf Gradients -->
+    <linearGradient id="rubyLeafGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff3344" />
+      <stop offset="50%" stop-color="#d90429" />
+      <stop offset="100%" stop-color="#800010" />
+    </linearGradient>
+
+    <linearGradient id="rubyLeafShade" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef233c" />
+      <stop offset="100%" stop-color="#59000a" />
+    </linearGradient>
+
+    <!-- Wave Gradients -->
+    <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0b523b" />
+      <stop offset="50%" stop-color="#199368" />
+      <stop offset="100%" stop-color="#093828" />
+    </linearGradient>
+
+    <linearGradient id="waveGrad2" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#043322" />
+      <stop offset="50%" stop-color="#22b07d" />
+      <stop offset="100%" stop-color="#0a4d36" />
+    </linearGradient>
+
+    <!-- Star Glow Filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur1" />
+      <feGaussianBlur stdDeviation="15" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Deep Emerald Background -->
+  <rect width="600" height="600" rx="36" fill="url(#bgGrad)" />
+
+  <g transform="translate(0, -10)">
+    <!-- Top Sprout / Leaves (Gold Outline) -->
+    <path d="M300 178 C300 152 284 135 258 132 C255 160 274 175 300 178 Z" 
+          fill="none" stroke="url(#goldRoof)" stroke-width="4.5" stroke-linejoin="round" />
+    <path d="M300 178 C300 152 316 135 342 132 C345 160 326 175 300 178 Z" 
+          fill="none" stroke="url(#goldRoof)" stroke-width="4.5" stroke-linejoin="round" />
+    <path d="M300 205 L300 176" stroke="url(#goldRoof)" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- House Outline -->
+    <!-- Chimney -->
+    <path d="M225 240 L225 200 L248 200 L248 221" 
+          fill="none" stroke="url(#goldRoof)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" />
+
+    <!-- Outer Roof & Walls -->
+    <path d="M170 270 L300 170 L430 270 L430 365 L170 365 Z" 
+          fill="none" stroke="url(#goldRoof)" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round" />
+
+    <!-- Eaves Trim / Secondary Outer Roof Accent -->
+    <path d="M170 270 L300 170 L430 270" 
+          fill="none" stroke="url(#goldRoof)" stroke-width="3" opacity="0.8" />
+
+    <!-- Red Stylized Maple / Geometric Leaf in House Center -->
+    <g transform="translate(300, 290)">
+      <!-- Leaf Stem -->
+      <line x1="0" y1="20" x2="0" y2="75" stroke="url(#goldRoof)" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Left half of red leaf -->
+      <polygon points="0,20 -15,15 -18,2 -35,10 -30,-5 -52,-2 -42,-22 -58,-32 -38,-35 -30,-48 -14,-40 -12,-55 0,-62" 
+               fill="url(#rubyLeafGrad)" />
+      <!-- Right half of red leaf -->
+      <polygon points="0,20 15,15 18,2 35,10 30,-5 52,-2 42,-22 58,-32 38,-35 30,-48 14,-40 12,-55 0,-62" 
+               fill="url(#rubyLeafShade)" />
+      <!-- Center Leaf Spine -->
+      <line x1="0" y1="-62" x2="0" y2="20" stroke="#ff8594" stroke-width="1.5" opacity="0.6" />
+    </g>
+
+    <!-- Starburst Glow at Right Roof Corner -->
+    <g transform="translate(382, 233)">
+      <circle cx="0" cy="0" r="14" fill="#fff4c2" opacity="0.75" filter="url(#glow)" />
+      <!-- 4-point Star Flares -->
+      <path d="M-28 0 Q0 0 0 -28 Q0 0 28 0 Q0 0 0 28 Q0 0 -28 0 Z" fill="#ffffff" filter="url(#glow)" />
+      <path d="M-15 -15 Q0 0 15 -15 Q0 0 15 15 Q0 0 -15 15 Q0 0 -15 -15 Z" fill="#ffeaa7" opacity="0.7" />
+    </g>
+
+    <!-- Flowing Waves at the Base (Cleaning / Purity Waves) -->
+    <path d="M150 376 Q220 395 300 380 T450 376 C415 398 345 408 300 398 C255 388 185 402 150 376 Z" 
+          fill="url(#waveGrad1)" />
+    <path d="M170 388 Q240 412 300 400 T430 388 C390 418 330 422 300 414 C270 406 210 420 170 388 Z" 
+          fill="url(#waveGrad2)" opacity="0.85" />
+  </g>
+
+  <!-- Typography -->
+  <text x="300" y="475" 
+        font-family="'Playfair Display', 'Cinzel', 'Times New Roman', serif" 
+        font-size="39" 
+        font-weight="700" 
+        letter-spacing="5" 
+        fill="url(#goldRoof)" 
+        text-anchor="middle">
+    GOLDEN HOME
+  </text>
+
+  <text x="300" y="508" 
+        font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" 
+        font-size="14.5" 
+        font-weight="600" 
+        letter-spacing="5.5" 
+        fill="#e6c673" 
+        text-anchor="middle"
+        opacity="0.95">
+    PREMIUM CLEANING SERVICE
+  </text>
+</svg>
