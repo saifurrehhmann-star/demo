@@ -18,6 +18,7 @@ export default function AboutIntro({ onOpenBooking }) {
               <img 
                 src="/images/staff-team.jpg" 
                 alt="Golden Home Professional Housekeeping Staff in Dubai" 
+                loading="lazy"
                 className="w-full h-[460px] sm:h-[500px] object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-95"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#061810]/90 via-transparent to-transparent" />

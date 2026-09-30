@@ -15,6 +15,7 @@ export default function SkillBarsSection({ onOpenBooking }) {
               <img 
                 src="/images/kitchen-clean.jpg" 
                 alt="Luxury Dubai Residence Cleaning" 
+                loading="lazy"
                 className="w-full h-[460px] object-cover object-center filter brightness-95"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#061810]/80 via-transparent to-transparent" />

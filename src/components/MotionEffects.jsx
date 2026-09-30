@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-const MOTION_CARDS = '[class*="rounded-3xl"][class*="border"], [class*="rounded-2xl"][class*="border"], [data-motion-card], .card-clean';
-const MOTION_TARGETS = `main section, ${MOTION_CARDS}`;
+const MOTION_CARDS = '[data-motion-card], .card-clean';
+const MOTION_TARGETS = 'main section, footer, [data-motion-section]';
 
 export default function MotionEffects() {
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+
     const targets = new Set();
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(({ isIntersecting, target }) => {

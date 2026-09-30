@@ -9,6 +9,7 @@ app.use(express.json());
 
 // In-memory bookings store for demo
 const bookings = [];
+const inquiries = [];
 
 // Dubai Service Areas Data
 const DUBAI_AREAS = [
@@ -41,12 +42,26 @@ app.get('/api/areas', (req, res) => {
   res.json({ success: true, count: DUBAI_AREAS.length, data: DUBAI_AREAS });
 });
 
+app.post('/api/inquiries', (req, res) => {
+  const { name, phone, email, area, service, message } = req.body;
+  if (!name || !phone) {
+    return res.status(400).json({ success: false, message: 'Name and phone number are required.' });
+  }
+  const inquiry = { id: `GH-INQ-${Date.now()}`, name, phone, email, area, service, message, createdAt: new Date().toISOString() };
+  inquiries.push(inquiry);
+  res.status(201).json({ success: true, message: 'Inquiry received.', inquiry: { id: inquiry.id } });
+});
+
 // Dynamic AED Price Calculator Endpoint
 app.post('/api/calculate', (req, res) => {
-  const { propertyType = 'apartment', bedrooms = '2', serviceType = 'deep-clean', frequency = 'weekly', addons = [] } = req.body;
+  const { propertyType = 'apartment', bedrooms = '2', serviceType = 'deep-clean', frequency = 'weekly', maidHours = 4, maidCleaners = 1, maidMaterials = true } = req.body;
+  const addons = Array.isArray(req.body.addons) ? req.body.addons : [];
 
   let base = 0;
-  if (propertyType === 'apartment') {
+  if (serviceType === 'maid-service') {
+    const ratePerHour = maidMaterials ? 50 : 40;
+    base = ratePerHour * Number(maidHours) * Number(maidCleaners);
+  } else if (propertyType === 'apartment') {
     switch (bedrooms) {
       case 'studio': base = 249; break;
       case '1': base = 329; break;
@@ -69,8 +84,6 @@ app.post('/api/calculate', (req, res) => {
   if (serviceType === 'move-in-out') base = Math.round(base * 1.25);
   if (serviceType === 'sofa-carpet') base = 340;
   if (serviceType === 'ac-duct') base = 420;
-  if (serviceType === 'marble-polish') base = 550;
-
   const addonPrices = {
     oven: 80,
     fridge: 60,
@@ -110,7 +123,7 @@ app.post('/api/calculate', (req, res) => {
 
 // Create Booking Endpoint
 app.post('/api/bookings', (req, res) => {
-  const { name, phone, email, area, building, date, timeSlot, serviceType, total } = req.body;
+  const { name, phone, email, area, building, date, timeSlot, serviceType, total, paymentMethod, notes } = req.body;
 
   if (!name || !phone) {
     return res.status(400).json({ success: false, message: 'Name and Dubai phone number are required.' });
@@ -127,8 +140,10 @@ app.post('/api/bookings', (req, res) => {
     date,
     timeSlot,
     serviceType: serviceType || 'Luxury Deep Cleaning',
-    total: total || 449,
-    status: 'Confirmed - Crew Dispatched',
+    paymentMethod,
+    notes,
+    total: Number.isFinite(Number(total)) && total !== null && total !== '' ? Number(total) : null,
+    status: 'Request Received',
     createdAt: new Date().toISOString()
   };
 
@@ -137,7 +152,7 @@ app.post('/api/bookings', (req, res) => {
 
   res.status(201).json({
     success: true,
-    message: 'Booking confirmed successfully. Dispatch coordinator notified.',
+    message: 'Booking request received successfully.',
     booking
   });
 });

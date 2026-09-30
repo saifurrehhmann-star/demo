@@ -103,7 +103,7 @@ export default function RoomChecklist({ onOpenBooking }) {
                   onClick={() => setActiveTab(key)}
                   className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
                     activeTab === key
-                      ? 'bg-[#0b462f] text-white shadow-md shadow-[#0b462f]/20 scale-105'
+                      ? 'bg-[#29945a] text-white shadow-md shadow-[#0b462f]/20 scale-105'
                       : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-600'
                   }`}
                 >
@@ -170,7 +170,7 @@ export default function RoomChecklist({ onOpenBooking }) {
               </div>
               <button
                 onClick={() => onOpenBooking()}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#0b462f] hover:bg-[#073221] shadow-md transition whitespace-nowrap"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#29945a] hover:bg-[#197543] shadow-md transition whitespace-nowrap"
               >
                 Book With This Standard
               </button>

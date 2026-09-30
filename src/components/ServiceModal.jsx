@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, CheckCircle, ShieldCheck, Sparkles, Clock, ArrowRight } from 'lucide-react';
+import { X, CheckCircle, MessageSquare, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function ServiceModal({ service, onClose, onBookNow }) {
   if (!service) return null;
@@ -32,28 +32,7 @@ export default function ServiceModal({ service, onClose, onBookNow }) {
           </div>
         </div>
 
-        {/* Pricing & Duration Bar */}
-        <div className="my-5 p-4 rounded-2xl bg-[#05170f] border border-[#d4af37]/30 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <span className="text-xs text-slate-400 block">Starting Investment</span>
-            <div className="flex items-baseline gap-1">
-              <span className="font-serif text-2xl font-bold text-[#f5d77f]">
-                {service.priceStarting}
-              </span>
-              <span className="text-xs font-bold text-white">AED / {service.unit}</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 text-xs text-slate-300">
-            <Clock className="w-4 h-4 text-emerald-400" />
-            <span>Average Duration: 3 - 6 hours</span>
-          </div>
-
-          <div className="flex items-center gap-1.5 text-xs text-[#f5d77f] font-semibold">
-            <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-            <span>24h Free Re-Clean</span>
-          </div>
-        </div>
+        <div className="my-5 flex items-start gap-3 rounded-2xl border border-emerald-100 bg-[#f3f8f4] p-4 text-sm leading-6 text-slate-600"><MessageSquare className="mt-0.5 h-4 w-4 shrink-0 text-[#23834e]" />The final scope and quote are confirmed after you share your property details.</div>
 
         {/* Overview */}
         <div className="space-y-4 text-sm text-slate-300">
@@ -118,7 +97,7 @@ export default function ServiceModal({ service, onClose, onBookNow }) {
             }}
             className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-[#061810] bg-gradient-to-r from-[#fae8a4] via-[#d4af37] to-[#e5c07b] hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-[#d4af37]/20 flex items-center gap-2"
           >
-            <span>Book This Service (AED {service.priceStarting})</span>
+            <span>Ask about this service</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

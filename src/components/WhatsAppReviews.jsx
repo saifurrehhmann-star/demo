@@ -29,7 +29,7 @@ export default function WhatsAppReviews() {
               className="rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-emerald-500 transition-all flex flex-col justify-between"
             >
               {/* WhatsApp Chat Header */}
-              <div className="bg-[#0b462f] p-4 text-white flex items-center justify-between">
+              <div className="bg-[#29945a] p-4 text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 text-white font-bold text-xs flex items-center justify-center border border-white/30 shadow-sm">
                     {rev.avatar}
@@ -106,7 +106,7 @@ export default function WhatsAppReviews() {
             href="https://wa.me/971502116822?text=Hello%20Golden%20Home%2C%20I%20have%20sent%20pictures%20of%20my%20residence%20for%20cleaning."
             target="_blank"
             rel="noreferrer"
-            className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#0b462f] hover:bg-[#073221] shadow-md transition flex items-center gap-2 whitespace-nowrap"
+            className="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#29945a] hover:bg-[#197543] shadow-md transition flex items-center gap-2 whitespace-nowrap"
           >
             <MessageSquare className="w-4 h-4 text-[#f5d77f]" />
             <span>Chat on WhatsApp (+971 50 211 6822)</span>

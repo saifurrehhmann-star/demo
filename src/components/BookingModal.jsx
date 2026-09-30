@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, Calendar, Clock, MapPin, Phone, User, Mail, Sparkles, ShieldCheck } from 'lucide-react';
-import { DUBAI_AREAS } from '../data/cleaningData';
+import { Link } from 'react-router-dom';
+import { X, CheckCircle2, Calendar, Clock, MapPin, Phone, User, Mail, Sparkles } from 'lucide-react';
+import { DUBAI_AREAS, SERVICES_LIST } from '../data/cleaningData';
+
+const getLocalDateValue = () => {
+  const date = new Date();
+  const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60_000);
+  return localDate.toISOString().split('T')[0];
+};
 
 export default function BookingModal({ isOpen, onClose, prefillData }) {
   const [step, setStep] = useState(1);
@@ -10,20 +17,42 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
     email: '',
     area: prefillData?.area || 'Downtown Dubai',
     building: '',
-    date: new Date().toISOString().split('T')[0],
-    timeSlot: '09:00 AM - 01:00 PM',
-    notes: '',
-    paymentMethod: 'cash-after'
+    date: getLocalDateValue(),
+    timeSlot: 'Morning',
+    notes: prefillData?.notes || '',
+    serviceType: prefillData?.serviceType || SERVICES_LIST[0].id,
   });
   const [bookingRef, setBookingRef] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const ref = `GH-DXB-${Math.floor(1000 + Math.random() * 9000)}`;
-    setBookingRef(ref);
-    setStep(2); // Confirmation step
+    setIsSubmitting(true);
+    setSubmitError('');
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name, phone: formData.phone, email: formData.email,
+          area: formData.area, building: formData.building, date: formData.date,
+          timeSlot: formData.timeSlot, serviceType: formData.serviceType,
+          notes: formData.notes,
+          total: prefillData?.total ?? prefillData?.base,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || 'Booking request could not be sent.');
+      setBookingRef(result.booking.bookingRef);
+      setStep(2);
+    } catch (error) {
+      setSubmitError(error.message || 'Unable to connect. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -49,13 +78,13 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
             {/* Modal Header */}
             <div className="pb-5 border-b border-slate-100 pr-10 text-left">
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#0b462f] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 inline-block mb-2">
-                Dubai 5-Star Residential Service
+                Golden Home cleaning enquiry
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
                 Confirm Reservation
               </h3>
               <p className="text-xs text-slate-600 mt-1">
-                Zero upfront payment. Pay securely upon completion after your final inspection.
+                Send your preferred service, timing and property details. We’ll confirm availability with you.
               </p>
             </div>
 
@@ -102,7 +131,7 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
                 {/* Dubai Mobile Number */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Dubai Phone / WhatsApp *
+                    Phone number *
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
@@ -121,7 +150,7 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
               {/* Email Address */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Email Address (For VAT invoice & report)
+                    Email Address (optional)
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
@@ -133,6 +162,13 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-[#0b462f]"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Service requested</label>
+                <select value={formData.serviceType} onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs text-slate-900 focus:border-[#0b462f] focus:bg-white focus:outline-none sm:text-sm">
+                  {SERVICES_LIST.map((service) => <option key={service.id} value={service.id}>{service.title}</option>)}
+                </select>
               </div>
 
               {/* Area & Building Address */}
@@ -199,54 +235,29 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
                       onChange={(e) => setFormData({ ...formData, timeSlot: e.target.value })}
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-[#0b462f]"
                     >
-                      <option value="08:00 AM - 12:00 PM">Morning (08:00 AM - 12:00 PM)</option>
-                      <option value="01:00 PM - 05:00 PM">Afternoon (01:00 PM - 05:00 PM)</option>
-                      <option value="05:00 PM - 09:00 PM">Evening (05:00 PM - 09:00 PM)</option>
+                        <option value="Morning">Morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                        <option value="Evening">Evening</option>
                     </select>
                   </div>
                 </div>
               </div>
 
-              {/* Payment Method Radio */}
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                  Payment Method (Pay After Completion)
-                </label>
-                <div className="grid grid-cols-3 gap-2 text-xs">
-                  {[
-                    { id: 'cash-after', label: 'Cash on Completion' },
-                    { id: 'apple-pay', label: 'Card / Apple Pay' },
-                    { id: 'tabby', label: 'Tabby (4 Installments)' }
-                  ].map((p) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, paymentMethod: p.id })}
-                      className={`p-2.5 rounded-xl border text-center font-semibold transition ${
-                        formData.paymentMethod === p.id 
-                          ? 'bg-emerald-50 border-[#0b462f] text-[#0b462f] ring-1 ring-[#0b462f]' 
-                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300'
-                      }`}
-                    >
-                      {p.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <p className="rounded-xl bg-[#f3f8f4] p-3 text-xs leading-5 text-slate-600">This form sends a booking request. Service details, price and availability are confirmed separately.</p>
+
+              {submitError && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">{submitError}</p>}
 
               {/* Submit CTA */}
               <button
                 type="submit"
-                className="w-full mt-3 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#0b462f] hover:bg-[#073221] active:scale-98 transition-all shadow-lg shadow-[#0b462f]/20 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
+                className="w-full mt-3 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#29945a] hover:bg-[#197543] active:scale-98 transition-all shadow-lg shadow-[#0b462f]/20 flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4 text-[#f5d77f]" />
-                <span>Confirm VIP Cleaning Reservation</span>
+                <span>{isSubmitting ? 'Sending request…' : 'Send booking request'}</span>
               </button>
 
-              <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#0b462f]" />
-                <span>Free cancellation anytime up to 2 hours before scheduled dispatch</span>
-              </div>
             </form>
           </div>
         ) : (
@@ -258,13 +269,13 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
 
             <div className="space-y-2">
               <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-[#0b462f] border border-emerald-200">
-                Reservation Confirmed
+                Booking Request Received
               </span>
               <h3 className="font-serif text-3xl font-bold text-slate-900">
                 Booking Reference: {bookingRef}
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
-                Thank you, <strong>{formData.name}</strong>. A dedicated Golden Home supervisor will contact you via WhatsApp (+971 50 211 6822) to confirm van dispatch for <strong>{formData.date}</strong> at <strong>{formData.area}</strong>.
+                Thank you, <strong>{formData.name}</strong>. Your request for <strong>{formData.date}</strong> in <strong>{formData.area}</strong> is recorded for this demo session. Booking notifications are not connected yet.
               </p>
             </div>
 
@@ -288,17 +299,10 @@ export default function BookingModal({ isOpen, onClose, prefillData }) {
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href={`https://wa.me/971502116822?text=${encodeURIComponent(`Hi Golden Home, I just confirmed reservation ${bookingRef} for ${formData.name} at ${formData.area} on ${formData.date}.`)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition"
-              >
-                Chat on WhatsApp (+971 50 211 6822)
-              </a>
+              <Link to="/contact" onClick={handleReset} className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition text-center">Contact the team</Link>
               <button
                 onClick={handleReset}
-                className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#0b462f] hover:bg-[#073221] transition shadow-md"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#29945a] hover:bg-[#197543] transition shadow-md"
               >
                 Done / Close
               </button>

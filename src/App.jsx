@@ -15,13 +15,20 @@ import PricingPage from './pages/PricingPage';
 import TransformationsPage from './pages/TransformationsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
+import BlogPage from './pages/BlogPage';
+import FaqPage from './pages/FaqPage';
+import AreasPage from './pages/AreasPage';
+import BlogArticlePage from './pages/BlogArticlePage';
 
 export default function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [prefillBookingData, setPrefillBookingData] = useState(null);
+  const [bookingInstance, setBookingInstance] = useState(0);
 
   const handleOpenBooking = (data = null) => {
     setPrefillBookingData(data);
+    setBookingInstance((instance) => instance + 1);
     setIsBookingOpen(true);
   };
 
@@ -29,7 +36,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <MotionEffects />
-      <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans selection:bg-[#0b462f] selection:text-white">
+      <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans selection:bg-[#29945a] selection:text-white">
         {/* Navigation */}
         <Navbar onOpenBooking={handleOpenBooking} />
 
@@ -38,11 +45,16 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage onOpenBooking={handleOpenBooking} />} />
             <Route path="/services" element={<ServicesPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/services/:slug" element={<ServiceDetailPage onOpenBooking={handleOpenBooking} />} />
             <Route path="/holiday-homes" element={<HolidayHomesPage onOpenBooking={handleOpenBooking} />} />
             <Route path="/calculator" element={<PricingPage onOpenBooking={handleOpenBooking} />} />
             <Route path="/transformations" element={<TransformationsPage onOpenBooking={handleOpenBooking} />} />
             <Route path="/about" element={<AboutPage onOpenBooking={handleOpenBooking} />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogArticlePage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/areas" element={<AreasPage onOpenBooking={handleOpenBooking} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
@@ -55,6 +67,7 @@ export default function App() {
 
         {/* VIP Booking Modal */}
         <BookingModal 
+          key={bookingInstance}
           isOpen={isBookingOpen} 
           onClose={() => setIsBookingOpen(false)} 
           prefillData={prefillBookingData} 

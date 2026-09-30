@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { HelpCircle, ChevronDown, Phone, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { HelpCircle, ChevronDown, MessageSquare } from 'lucide-react';
 import { FAQS } from '../data/cleaningData';
 
 export default function FaqSection() {
@@ -23,7 +24,7 @@ export default function FaqSection() {
             Everything You Need <span className="text-[#0b462f]">To Know</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-600">
-            Clear, transparent answers about our Dubai residential housekeeping and sanitization standards.
+            Straightforward information about services, booking and visit details.
           </p>
         </div>
 
@@ -43,23 +44,23 @@ export default function FaqSection() {
                 <button
                   type="button"
                   onClick={() => toggle(index)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${index}`}
                   className="w-full p-5 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base"
                 >
                   <span className={`${isOpen ? 'text-[#0b462f] font-bold' : 'text-slate-900'}`}>
                     {faq.q}
                   </span>
                   <div className={`p-1.5 rounded-full bg-slate-100 text-slate-500 transition-transform duration-300 flex-shrink-0 ${
-                    isOpen ? 'rotate-180 text-white bg-[#0b462f]' : ''
+                    isOpen ? 'rotate-180 text-white bg-[#29945a]' : ''
                   }`}>
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3 animate-in fade-in duration-200 text-left">
-                    {faq.a}
-                  </div>
-                )}
+                <div id={`faq-answer-${index}`} role="region" className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                  <div className="overflow-hidden"><p className={`border-t border-slate-100 px-5 text-xs leading-relaxed text-slate-600 transition-[padding,opacity] duration-300 sm:text-sm ${isOpen ? 'pb-5 pt-3 opacity-100' : 'py-0 opacity-0'}`}>{faq.a}</p></div>
+                </div>
               </div>
             );
           })}
@@ -72,27 +73,12 @@ export default function FaqSection() {
               Have a custom request or high-rise penthouse?
             </h4>
             <p className="text-xs text-slate-600">
-              Our Dubai concierge is ready 7 days a week to provide customized quotes.
+              Send us your property details and we can discuss an appropriate service.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <a
-              href="tel:+971502116822"
-              className="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition flex items-center gap-1.5"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#0b462f]" />
-              <span>Call Us</span>
-            </a>
-            <a
-              href="https://wa.me/971502116822?text=Hello%20Golden%20Home%2C%20I%20have%20a%20question%20about%20your%20services."
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0b462f] hover:bg-[#073221] shadow-sm transition flex items-center gap-1.5"
-            >
-              <MessageSquare className="w-3.5 h-3.5 text-[#f5d77f]" />
-              <span>WhatsApp</span>
-            </a>
+            <Link to="/contact" className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#29945a] hover:bg-[#197543] shadow-sm transition flex items-center gap-1.5"><MessageSquare className="w-3.5 h-3.5 text-[#f5d77f]" /><span>Contact us</span></Link>
           </div>
         </div>
 

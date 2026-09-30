@@ -1,239 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import GoldenLogo from './GoldenLogo';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Clock, MapPin, MessageSquare } from 'lucide-react';
+import { SERVICE_PAGES, servicePathFor } from '../data/servicePages';
+
+const quickLinks = [
+  { to: '/about', label: 'About us' }, { to: '/holiday-homes', label: 'Holiday homes' },
+  { to: '/calculator', label: 'Cost calculator' }, { to: '/blog', label: 'Cleaning guides' },
+  { to: '/faq', label: 'FAQs' }, { to: '/areas', label: 'Areas' }, { to: '/contact', label: 'Contact' },
+];
+const currentYear = new Date().getFullYear();
 
 export default function Footer({ onOpenBooking }) {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (newsletterEmail) {
-      setSubscribed(true);
-      setNewsletterEmail('');
-    }
-  };
-
-  return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0b462f] text-white/80">
-      
-      {/* Top Emerald CTA Banner */}
-      <div className="bg-gradient-to-r from-[#06281a] via-[#0b462f] to-[#06281a] text-white py-12 px-4 sm:px-6 lg:px-8 shadow-inner shadow-black/20">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#f5d77f]">
-              Cleaning Your Home Worries Away!
-            </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-              Ready for 5-Star Home Cleanliness in Dubai?
-            </h3>
-            <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl">
-              Book online in 60 seconds. Zero upfront deposit required. 100% satisfaction guarantee or we re-clean within 24 hours free.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <button
-              onClick={() => onOpenBooking()}
-              className="px-7 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-[#06281a] bg-[#f5d77f] hover:bg-white active:scale-95 transition-all shadow-lg shadow-black/20"
-            >
-              Book Service in 60s
-            </button>
-            <a
-              href="https://wa.me/971502116822?text=Hello%20Golden%20Home%20Dubai%2C%20I%20would%20like%20to%20book%20a%20luxury%20home%20cleaning%20service."
-              target="_blank"
-              rel="noreferrer"
-              className="px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-white/10 hover:bg-white/20 border border-white/25 transition flex items-center gap-2"
-            >
-              <MessageSquare className="w-4 h-4 text-[#f5d77f]" />
-              <span>WhatsApp Concierge</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main 4-Column Directory */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-left">
-          
-          {/* Col 1: Brand & Contact Info */}
-          <div className="space-y-4">
-            <GoldenLogo className="h-12" variant="dark" />
-            <p className="text-xs leading-relaxed text-white/70">
-              Dubai’s premier residential housekeeping service. Specializing exclusively in luxury villas, family penthouses, and holiday home turnovers.
-            </p>
-
-            <div className="space-y-2.5 pt-2 text-xs text-white/80">
-              <p className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#f5d77f] flex-shrink-0 mt-0.5" />
-                <span>Al Quoz Industrial 4 & Downtown Dubai, UAE</span>
-              </p>
-              <p className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#f5d77f] flex-shrink-0" />
-                <a href="tel:+971502116822" className="font-semibold transition hover:text-[#f5d77f]">
-                  +971 50 211 6822 / +971 50 213 6022
-                </a>
-              </p>
-              <p className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#f5d77f] flex-shrink-0" />
-                <a href="mailto:info@goldenhome.ae" className="transition hover:text-[#f5d77f]">
-                  info@goldenhome.ae
-                </a>
-              </p>
-              <p className="flex items-center gap-2.5">
-                <Clock className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                <span>Mon – Sun : 08:00 AM – 08:00 PM (Daily)</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Col 2: Residential Services */}
-          <div className="space-y-3">
-            <h4 className="border-b border-white/15 pb-2 font-serif text-sm font-bold uppercase tracking-wider text-[#f5d77f]">
-              Residential Services
-            </h4>
-            <ul className="space-y-2 text-xs text-white/70">
-              <li>
-                <Link to="/services" className="inline-block transition hover:translate-x-1 hover:text-[#f5d77f]">
-                  🏰 Villa Deep Cleaning
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  🏢 Apartment Deep Cleaning
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  🔑 Move-In / Move-Out (Ejari Pass)
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  🧹 5-Star Maid Service (Hourly)
-                </Link>
-              </li>
-              <li>
-                <Link to="/holiday-homes" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  🏖️ Holiday Homes & Airbnb Turnover
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  🛋️ Sofa & Carpet Steam Extraction
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Quick Navigation */}
-          <div className="space-y-3">
-            <h4 className="border-b border-white/15 pb-2 font-serif text-sm font-bold uppercase tracking-wider text-[#f5d77f]">
-              Quick Links
-            </h4>
-            <ul className="space-y-2 text-xs text-white/70">
-              <li>
-                <Link to="/" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  Home Page
-                </Link>
-              </li>
-              <li>
-                <Link to="/calculator" className="inline-block font-semibold text-emerald-200 transition hover:translate-x-1 hover:text-[#f5d77f]">
-                  ⚡ Instant Cost Calculator
-                </Link>
-              </li>
-              <li>
-                <Link to="/transformations" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  Before & After Slider
-                </Link>
-              </li>
-              <li>
-                <Link to="/holiday-homes" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  Airbnb Superhost Packages
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  About Our Dubai Team
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-[#f5d77f] hover:translate-x-1 inline-block transition">
-                  Contact & Dispatch Map
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 4: Newsletter & Trust */}
-          <div className="space-y-3">
-            <h4 className="border-b border-white/15 pb-2 font-serif text-sm font-bold uppercase tracking-wider text-[#f5d77f]">
-              Dubai Newsletter
-            </h4>
-            <p className="text-xs text-white/70">
-              Subscribe for seasonal maintenance guides, sandstorm recovery discounts, and exclusive Dubai resident promotions.
-            </p>
-
-            {subscribed ? (
-              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-xs text-emerald-800 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span>Thank you! You are now subscribed.</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email address..."
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0b462f] shadow-sm"
-                />
-                <button
-                  type="submit"
-                  className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#f5d77f] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#123b2a] shadow-sm transition hover:bg-[#ffe9a4]"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>Subscribe</span>
-                </button>
-              </form>
-            )}
-
-            {/* Social Proof */}
-            <div className="pt-2">
-              <span className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-white/60">
-                Dubai Resident Trust:
-              </span>
-              <div className="flex items-center gap-2 text-xs font-bold text-emerald-100">
-                <span className="rounded-md bg-white/10 px-2 py-1">✓ TADBEER Certified</span>
-                <span className="rounded-md bg-white/10 px-2 py-1">✓ Dubai Police Vetted</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/15 pt-8 text-xs text-white/60 md:flex-row">
-          <div>
-            © {new Date().getFullYear()} Golden Home Premium Cleaning Service LLC. All rights reserved. Registered in Dubai, UAE.
-          </div>
-
-          <div className="flex items-center gap-2 flex-wrap justify-center">
-            <span className="text-[11px] font-semibold text-white/70">Accepted UAE Payments:</span>
-            <div className="flex items-center gap-1.5 font-bold text-[10px] text-slate-700">
-              <span className="px-2.5 py-1 rounded bg-white border border-slate-200 shadow-sm">Apple Pay</span>
-              <span className="px-2.5 py-1 rounded bg-white border border-slate-200 shadow-sm">Visa</span>
-              <span className="px-2.5 py-1 rounded bg-white border border-slate-200 shadow-sm">MasterCard</span>
-              <span className="px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-sm">Tabby (4 Installments)</span>
-              <span className="px-2.5 py-1 rounded bg-amber-50 text-amber-900 border border-amber-200 shadow-sm">Cash on Delivery</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </footer>
-  );
+  return <footer className="mt-auto bg-[#0b462f] text-white">
+    <div className="bg-[#123f2b] px-4 py-9 sm:px-6 sm:py-11 lg:px-8"><div className="mx-auto flex max-w-7xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-[10px] font-extrabold uppercase tracking-[.18em] text-emerald-200">A fresh start for your home</p><h2 className="mt-2 font-serif text-2xl font-bold sm:text-3xl">Tell us what your space needs.</h2><p className="mt-2 max-w-xl text-sm leading-6 text-white/75">Ask about a service or request a booking with Golden Home.</p></div><div className="flex flex-col gap-2 min-[420px]:flex-row"><button onClick={() => onOpenBooking()} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#29945a] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#35a969]">Request a booking</button><Link to="/contact" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/15"><MessageSquare className="h-4 w-4" />Send an enquiry</Link></div></div></div>
+    <div className="mx-auto grid max-w-7xl gap-9 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.25fr_1fr_1fr_1.2fr] lg:gap-8 lg:px-8 lg:py-14">
+      <div><GoldenLogo className="h-12" variant="dark" /><p className="mt-4 max-w-sm text-sm leading-6 text-white/70">Home cleaning services in Dubai. Explore our service options and contact the team to discuss the right fit for your property.</p></div>
+      <div><h3 className="mb-4 text-xs font-extrabold uppercase tracking-[.16em] text-[#f5c84c]">Services</h3><ul className="space-y-2.5">{SERVICE_PAGES.map((service) => <li key={service.slug}><Link to={servicePathFor(service.slug)} className="text-sm text-white/75 transition hover:text-white">{service.title}</Link></li>)}<li><Link to="/holiday-homes" className="text-sm text-white/75 transition hover:text-white">Holiday Home Cleaning</Link></li></ul></div>
+      <div><h3 className="mb-4 text-xs font-extrabold uppercase tracking-[.16em] text-[#f5c84c]">Explore</h3><ul className="space-y-2.5">{quickLinks.map(({ to, label }) => <li key={to}><Link to={to} className="text-sm text-white/75 transition hover:text-white">{label}</Link></li>)}</ul></div>
+      <div><h3 className="mb-4 text-xs font-extrabold uppercase tracking-[.16em] text-[#f5c84c]">Contact</h3><ul className="space-y-3 text-sm text-white/75"><li className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-emerald-200" /><span>Dubai, United Arab Emirates</span></li><li className="flex items-center gap-2.5"><Clock className="h-4 w-4 shrink-0 text-emerald-200" /><span>Availability confirmed on enquiry</span></li><li><Link to="/contact" className="inline-flex items-center gap-2 text-white underline decoration-white/30 underline-offset-4 hover:text-emerald-200"><MessageSquare className="h-4 w-4 text-emerald-200" />Open the enquiry form</Link></li></ul></div>
+    </div>
+    <div className="border-t border-white/10"><div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-[11px] text-white/55 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"><span>© {currentYear} Golden Home. All rights reserved.</span><Link to="/contact" className="transition hover:text-white">Contact</Link></div></div>
+  </footer>;
 }

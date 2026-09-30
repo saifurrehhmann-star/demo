@@ -91,7 +91,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
               onClick={() => { setActiveTab('sofa'); setSliderPosition(50); }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'sofa'
-                  ? 'bg-[#0b462f] text-white shadow-md'
+                  ? 'bg-[#29945a] text-white shadow-md'
                   : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-600'
               }`}
             >
@@ -101,7 +101,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
               onClick={() => { setActiveTab('kitchen'); setSliderPosition(50); }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'kitchen'
-                  ? 'bg-[#0b462f] text-white shadow-md'
+                  ? 'bg-[#29945a] text-white shadow-md'
                   : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-600'
               }`}
             >
@@ -111,7 +111,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
               onClick={() => { setActiveTab('marble'); setSliderPosition(50); }}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === 'marble'
-                  ? 'bg-[#0b462f] text-white shadow-md'
+                  ? 'bg-[#29945a] text-white shadow-md'
                   : 'bg-white text-slate-700 border border-slate-200 hover:border-emerald-600'
               }`}
             >
@@ -146,6 +146,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
               <img 
                 src={current.afterImg} 
                 alt="After Golden Home Cleaning" 
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
               />
 
@@ -157,6 +158,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
                 <img 
                   src={current.beforeImg} 
                   alt="Before Golden Home Cleaning" 
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover object-center max-w-none pointer-events-none"
                   style={{ width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%' }}
                 />
@@ -169,7 +171,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
                 </span>
               </div>
               <div className="absolute top-4 right-4 z-20 pointer-events-none">
-                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0b462f]/90 text-white backdrop-blur-md shadow-md">
+                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#29945a]/90 text-white backdrop-blur-md shadow-md">
                   After Golden Home 5★
                 </span>
               </div>
@@ -179,7 +181,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
                 className="absolute top-0 bottom-0 z-30 pointer-events-none"
                 style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
               >
-                <div className="w-1 h-full bg-[#0b462f] shadow-[0_0_12px_rgba(11,70,47,0.8)]" />
+                <div className="w-1 h-full bg-[#29945a] shadow-[0_0_12px_rgba(11,70,47,0.8)]" />
 
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white border-2 border-[#0b462f] shadow-2xl flex items-center justify-center text-[#0b462f]">
                   <ArrowLeftRight className="w-4 h-4" />
@@ -215,7 +217,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
               </span>
               <button
                 onClick={() => onOpenBooking()}
-                className="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#0b462f] hover:bg-[#073221] shadow-md transition"
+                className="px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-[#29945a] hover:bg-[#197543] shadow-md transition"
               >
                 Schedule This Service
               </button>

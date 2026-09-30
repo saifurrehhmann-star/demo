@@ -1,193 +1,55 @@
 export const DUBAI_AREAS = [
-  { name: 'Downtown Dubai', eta: '30 mins', zone: 'Central' },
-  { name: 'Palm Jumeirah', eta: '25 mins', zone: 'Coast' },
-  { name: 'Dubai Marina & JBR', eta: '20 mins', zone: 'Coast' },
-  { name: 'Emirates Hills & Meadows', eta: '35 mins', zone: 'South' },
-  { name: 'Dubai Hills Estate', eta: '30 mins', zone: 'Central' },
-  { name: 'Business Bay', eta: '30 mins', zone: 'Central' },
-  { name: 'Arabian Ranches 1 & 2', eta: '40 mins', zone: 'East' },
-  { name: 'Bluewaters Island', eta: '25 mins', zone: 'Coast' },
-  { name: 'Jumeirah Golf Estates', eta: '35 mins', zone: 'South' },
-  { name: 'JVC & JVT', eta: '30 mins', zone: 'Central' },
-  { name: 'Al Barsha & Umm Suqeim', eta: '25 mins', zone: 'West' },
-  { name: 'Meydan & MBR City', eta: '35 mins', zone: 'Central' }
+  { name: 'Downtown Dubai' }, { name: 'Palm Jumeirah' }, { name: 'Dubai Marina & JBR' },
+  { name: 'Emirates Hills & Meadows' }, { name: 'Dubai Hills Estate' }, { name: 'Business Bay' },
+  { name: 'Arabian Ranches 1 & 2' }, { name: 'Bluewaters Island' }, { name: 'Jumeirah Golf Estates' },
+  { name: 'JVC & JVT' }, { name: 'Al Barsha & Umm Suqeim' }, { name: 'Meydan & MBR City' },
 ];
 
+// Core offerings already present in the Golden Home site.
 export const SERVICES_LIST = [
   {
-    id: 'villa-cleaning',
-    title: 'Villa Deep Cleaning',
-    subtitle: 'Comprehensive 85-Point Luxury Care',
-    tag: 'Villa Specialist',
-    description: 'Specialized deep scrubbing, floor machine buffing, and sanitization for luxury villas and townhouses in Palm Jumeirah, Emirates Hills, and Dubai Hills.',
-    priceStarting: 599,
-    unit: 'villa',
+    id: 'villa-cleaning', title: 'Villa Deep Cleaning', subtitle: 'Detailed cleaning for villas and townhouses', tag: 'Villa cleaning',
+    description: 'Deep cleaning options for villas and townhouses. Share the rooms and tasks you need when requesting a quote.',
     image: '/images/villa-cleaning.jpg',
-    features: [
-      'Multi-story villa deep scrub and tile descaling',
-      'Balcony, terrace & patio high-pressure jet wash',
-      'Full kitchen degreasing & inside cupboard detailing',
-      'All en-suite bathrooms limescale removal',
-      'Dubai Municipality certified eco-friendly sanitizers'
-    ],
-    whatsappMsg: 'Hi, I want to book Villa Deep Cleaning. Please share the Price and What is included.'
+    features: ['Bedrooms and shared living spaces', 'Kitchen and bathroom surfaces', 'Floors and reachable surfaces', 'Balconies or outdoor areas by request', 'Scope confirmed before booking'],
   },
   {
-    id: 'apartment-cleaning',
-    title: 'Apartment Deep Cleaning',
-    subtitle: 'Spotless Hotel-Grade Sanitization',
-    tag: 'Most Popular',
-    description: 'From cozy studios to luxury penthouses in Dubai Marina & Downtown, we clean every corner, skirting board, and vent grill to perfection.',
-    priceStarting: 249,
-    unit: 'apartment',
+    id: 'apartment-cleaning', title: 'Apartment Deep Cleaning', subtitle: 'Detailed cleaning for apartments', tag: 'Apartment cleaning',
+    description: 'Apartment deep cleaning options for kitchens, bathrooms, living spaces and bedrooms.',
     image: '/images/apartment-cleaning.jpg',
-    features: [
-      'Inside oven, cooker hood & fridge degreasing',
-      'Bathroom grout steam sanitization & glass descaling',
-      'Window tracks, ledges & balcony sliding door cleaning',
-      'Ceiling fan, spotlight and chandelier detailing',
-      'HEPA filtration vacuuming against desert dust'
-    ],
-    whatsappMsg: 'Hi, I want to book Apartment Deep Cleaning. Please share the Price and What is included.'
+    features: ['Kitchen and appliance surfaces by request', 'Bathrooms and tile surfaces', 'Floors, reachable ledges and living areas', 'Bedroom and shared spaces', 'Final scope confirmed before booking'],
   },
   {
-    id: 'move-in-out',
-    title: 'Move-In / Move-Out Cleaning',
-    subtitle: '100% Ejari Deposit Pass Guarantee',
-    tag: 'Ejari Guaranteed',
-    description: 'Guaranteed handover cleaning designed specifically for Dubai tenant inspections, ensuring 100% of your security deposit is returned by your landlord.',
-    priceStarting: 449,
-    unit: 'residence',
+    id: 'move-in-out', title: 'Move-In / Move-Out Cleaning', subtitle: 'Cleaning support for a move', tag: 'Moving home',
+    description: 'A detailed clean to prepare an apartment or villa for moving in or handing it over.',
     image: '/images/move-in-out.jpg',
-    features: [
-      '100% Ejari inspection pass or free re-clean within 24h',
-      'Inside all built-in wardrobes, drawers & cabinets',
-      'Wall scuff marks and adhesive sticker removal',
-      'Full limescale, silicone & calcium restoration',
-      'Formal inspection readiness certificate signed'
-    ],
-    whatsappMsg: 'Hi, I want to book Move-in / Move-out Deep Cleaning. Please share the Price and Ejari Guarantee details.'
+    features: ['Kitchen and bathroom cleaning', 'Floors and reachable surfaces', 'Empty cupboards by request', 'Move-related cleaning priorities', 'Scope confirmed before booking'],
   },
   {
-    id: 'maid-services',
-    title: '5-Star Trained Maid Service',
-    subtitle: 'Flexible Hourly & Recurring Housekeeping',
-    tag: 'TADBEER Certified',
-    description: 'Vetted, English-speaking professional home maids for recurring weekly care, laundry, crisp hotel bed making, and general home upkeep.',
-    priceStarting: 45,
-    unit: 'hour',
+    id: 'maid-services', title: 'Maid Service', subtitle: 'Regular home cleaning visits', tag: 'Home cleaning',
+    description: 'Regular home cleaning visits shaped around your schedule and priorities.',
     image: '/images/maid-service.jpg',
-    features: [
-      'TADBEER-licensed & legally sponsored in UAE',
-      'Verified Dubai Police background check & health test',
-      'Expert fabric laundry, steaming & crisp ironing',
-      'Option to bring professional cleaning materials',
-      'Same dedicated maid for recurring weekly visits'
-    ],
-    whatsappMsg: 'Hi, I want to book Maid Service. Please share available hours and rates.'
+    features: ['Everyday surface and floor care', 'Kitchen and bathroom upkeep', 'Recurring visit options', 'Tasks discussed before the visit', 'Supplies confirmed when booking'],
   },
   {
-    id: 'holiday-homes',
-    title: 'Holiday Home & Airbnb Cleaning',
-    subtitle: 'Same-Day Fast Guest Turnaround',
-    tag: 'Airbnb Superhost Choice',
-    description: 'Specialized turnover cleaning for holiday homes and vacation rentals across Dubai. Hotel linen change, guest toiletry setup, and photo inspection report.',
-    priceStarting: 199,
-    unit: 'turnover',
+    id: 'holiday-homes', title: 'Holiday Home Cleaning', subtitle: 'Cleaning for holiday homes', tag: 'Holiday homes',
+    description: 'Cleaning options for holiday homes and short stays. Contact us to confirm timing and requested tasks.',
     image: '/images/holiday-homes.jpg',
-    features: [
-      'Same-day express turnover between 11:00 AM & 3:00 PM',
-      'Laundered hotel-grade linen & towel setup',
-      'Restocking guest toiletries & welcome amenities',
-      'Damage & forgotten item inspection report with photos',
-      'Key lockbox & smart lock synchronization'
-    ],
-    whatsappMsg: 'Hi, I manage Holiday Homes / Airbnb in Dubai and need turnover cleaning rates.'
+    features: ['Guest-ready cleaning by request', 'Kitchen and bathroom care', 'Linen changes discussed in advance', 'Turnover timing confirmed before booking', 'Access instructions shared by the host'],
   },
   {
-    id: 'furniture-sofa',
-    title: 'Sofa, Carpet & Mattress Steam Extraction',
-    subtitle: 'Anti-Allergen Dust Mite Defense',
-    tag: 'German Steam Tech',
-    description: 'Deep 160°C hot water steam extraction that eliminates stubborn Dubai desert dust, beverage stains, pet hair, and microscopic allergens.',
-    priceStarting: 180,
-    unit: 'piece',
+    id: 'furniture-sofa', title: 'Sofa, Carpet & Mattress Cleaning', subtitle: 'Cleaning for home furnishings', tag: 'Furniture cleaning',
+    description: 'Ask about cleaning options for sofas, carpets, mattresses and other household furnishings.',
     image: '/images/sofa-after.jpg',
-    features: [
-      'Hot water extraction lifting embedded sand',
-      'Destroys 99.9% of dust mites, bacteria & allergens',
-      'Safe for velvet, Italian leather, linen & silk rugs',
-      'Fast 2-hour rapid dry micro-blower technology',
-      'Free Scotchgard stain-repellent protective coat'
-    ],
-    whatsappMsg: 'Hi, I want to book Sofa & Carpet Steam Cleaning. Please share rates.'
-  }
-];
-
-export const SKILL_METRICS = [
-  { title: 'Villa Deep Cleaning', value: 92 },
-  { title: 'Apartment Sanitization', value: 96 },
-  { title: 'Ejari Deposit Handover', value: 98 },
-  { title: 'Holiday Home Turnovers', value: 88 }
-];
-
-export const TRUST_COUNTERS = [
-  { count: '1,450+', label: 'Dubai Homes Cleaned' },
-  { count: '99.2%', label: 'Ejari Deposit Pass Rate' },
-  { count: '5.0 ★', label: 'Google Verified Rating' },
-  { count: '45+', label: 'TADBEER Certified Staff' }
-];
-
-export const WHATSAPP_REVIEWS = [
-  {
-    clientName: 'Sarah Al Qasimi',
-    community: 'Palm Jumeirah, Frond N',
-    date: 'Yesterday at 4:18 PM',
-    service: 'Villa Deep Cleaning',
-    avatar: 'SQ',
-    message: 'Hello Golden Home team! Just inspected our 5-bedroom villa after your team left. The marble floors look like a mirror and the kitchen grease is 100% gone. Thank you so much for sending such polite staff!'
+    features: ['Share item and fabric details when requesting a quote', 'Cleaning method confirmed for the material', 'Treatment options discussed before booking', 'Drying guidance provided for the chosen method', 'Scope and price confirmed in advance'],
   },
-  {
-    clientName: 'Marcus Lindqvist',
-    community: 'Marina Gate, Dubai Marina',
-    date: '3 days ago at 11:45 AM',
-    service: 'Move-Out Ejari Guarantee',
-    avatar: 'ML',
-    message: 'Just had my handover inspection with the Emaar building management and got my FULL AED 12,000 security deposit back without a single deduction. You guys saved me so much hassle. 10/10 recommend!'
-  },
-  {
-    clientName: 'Fatima & Dr. Zayd',
-    community: 'Sidra Villa, Dubai Hills Estate',
-    date: 'Last week at 6:30 PM',
-    service: 'Sofa & Mattress Steam Extraction',
-    avatar: 'FZ',
-    message: 'We had stubborn desert sand and juice spills on our light beige L-shaped sofa. Your German steam machine made it look brand new! Also appreciated the non-toxic eco smell. See you next month.'
-  }
 ];
 
 export const FAQS = [
-  {
-    q: 'How much does home deep cleaning cost in Dubai?',
-    a: 'Pricing depends on property size and configuration. Apartment deep cleaning starts from AED 249 for studios, while villa deep cleaning starts from AED 599. Hourly maid service is available from AED 45/hr. Use our live instant calculator above for an exact, transparent quote!'
-  },
-  {
-    q: 'Do you clean holiday homes and Airbnb properties?',
-    a: 'Yes! We are the preferred cleaning partner for dozens of Dubai holiday home operators and Airbnb Superhosts across Dubai Marina, Downtown, Palm Jumeirah, and JBR. We offer express same-day turnovers with fresh linen, restocking, and photo handover inspection.'
-  },
-  {
-    q: 'What is your 100% Ejari Deposit Pass Guarantee?',
-    a: 'Moving out of a Dubai home requires passing a strict landlord and building management inspection. If your landlord points out any cleaning deficiency on your checklist within 24 hours of our service, our supervisor returns and re-cleans that area free of charge.'
-  },
-  {
-    q: 'Do your maids bring their own cleaning materials?',
-    a: 'Yes. Our mobile team arrives in our Golden Home liveried van with heavy-duty German Kärcher steam machines, HEPA vacuums, fresh microfiber cloths, and Dubai Municipality-approved non-toxic eco-chemicals. For regular maid service, you can choose with or without supplies.'
-  },
-  {
-    q: 'Are your cleaners legally sponsored and background-checked?',
-    a: '100% yes. Every single Golden Home team member is legally sponsored under our UAE trade license, TADBEER compliant, verified by Dubai Police clearance, and covered by AED 1,000,000 comprehensive liability insurance.'
-  },
-  {
-    q: 'Which residential areas of Dubai do you serve?',
-    a: 'We cover all residential communities across Dubai including Palm Jumeirah, Downtown Dubai, Dubai Marina, JBR, Emirates Hills, Dubai Hills Estate, Arabian Ranches, JVC, Business Bay, Al Barsha, and Bluewaters.'
-  }
+  { q: 'How can I get a quote for home cleaning?', a: 'Use the booking form or contact our team with your property type, the rooms or items you would like cleaned, and your preferred date. We can confirm the available service and quote with you.' },
+  { q: 'Which types of homes can you clean?', a: 'Golden Home lists cleaning options for villas, apartments, move-in or move-out visits, regular maid service, holiday homes and selected furniture cleaning. Contact us to confirm the right service for your property.' },
+  { q: 'What is included in a cleaning visit?', a: 'The scope depends on the service and your property. We will discuss the rooms, surfaces, access and any special requests with you before confirming a booking.' },
+  { q: 'Can I request a particular date or time?', a: 'Share your preferred date and time in the booking form. Our team will confirm availability before the visit is finalized.' },
+  { q: 'Do you offer holiday home cleaning?', a: 'Holiday home cleaning is listed as one of our services. Contact us with your property details and timing needs so we can confirm the available scope.' },
+  { q: 'How do I change or cancel a booking?', a: 'Please contact our team using the details on the Contact page. We can help with a booking change and confirm any applicable notice requirements.' },
 ];
